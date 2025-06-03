@@ -133,53 +133,40 @@
 
         document.getElementById('saveGifButton').addEventListener('click', function () {
     const content = document.getElementById('content');
+    const status = document.getElementById('status');
+    status.textContent = "Rendering GIF, please wait...";
+    
     const gif = new GIF({
         workers: 2,
         quality: 10,
         width: content.offsetWidth,
         height: content.offsetHeight,
     });
-
-    const frames = 10; // Number of frames in the GIF
+    
+    const frames = 5; // reduce frames
     let frameCount = 0;
-
-    // Function to capture frames
+    
     function captureFrame() {
-        html2canvas(content).then((canvas) => {
-            gif.addFrame(canvas, { delay: 100 });
+        html2canvas(content).then(canvas => {
+            gif.addFrame(canvas, { delay: 200 });
             frameCount++;
+            status.textContent = `Rendering frame ${frameCount} of ${frames}`;
             if (frameCount < frames) {
-                captureFrame(); // Capture the next frame
+                captureFrame();
             } else {
-                gif.render(); // Start rendering the GIF
+                gif.on('finished', function(blob) {
+                    status.textContent = "GIF ready!";
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = 'animated_content.gif';
+                    link.click();
+                });
+                gif.render();
             }
-        }).catch((err) => {
-            console.error('Error capturing frame:', err);
-            alert('An error occurred while capturing the frame. Please try again.');
         });
     }
-
-    // Handle errors during GIF rendering
-    gif.on('error', (error) => {
-        console.error('GIF generation error:', error);
-        alert('An error occurred during GIF generation. Please try again.');
-    });
-
-    // Handle cases where GIF rendering is aborted
-    gif.on('abort', () => {
-        console.warn('GIF generation aborted.');
-        alert('GIF generation was aborted.');
-    });
-
-    // Handle successful completion of GIF rendering
-    gif.on('finished', (blob) => {
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'animated_content.gif'; // File name for the GIF
-        link.click(); // Trigger the download
-    });
-
-    captureFrame(); // Start capturing frames
+    
+    captureFrame();
 });
     </script>
 </body>
