@@ -3,68 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Content Page</title>
+    <title>Eid Greeting Card Generator</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
         }
-        #container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
         }
-        #input-section {
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .control-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;
+        }
+        
+        .panel-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c786c;
+            font-size: 24px;
+            position: relative;
+        }
+        
+        .panel-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #ff9933;
+            margin: 10px auto 0;
+        }
+        
+        .input-group {
             margin-bottom: 20px;
         }
-        #content {
-            padding: 20px;
-            border: 2px solid #ccc;
-            text-align: center;
-            background-color: #ffffff;
-            width: 80%;
-            max-width: 600px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            animation: flash 1s infinite;
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
         }
-        button {
-            padding: 10px 20px;
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
+            transition: border-color 0.3s;
         }
-        .social-icons {
+        
+        input:focus {
+            outline: none;
+            border-color: #2c786c;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #2c786c 0%, #5aa897 100%);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
             margin-top: 10px;
         }
-        .social-icons img {
-            width: 30px;
-            height: 30px;
-            margin: 0 5px;
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 120, 108, 0.3);
         }
-        img.qr-image {
-            margin-top: 15px;
-            width: 200px;
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        #saveGifButton {
+            background: linear-gradient(135deg, #ff9933 0%, #ffb366 100%);
+            margin-top: 20px;
+        }
+        
+        .preview-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .preview-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c786c;
+            font-size: 22px;
+        }
+        
+        #content {
+            padding: 30px;
+            border: 3px solid #f0f0f0;
+            text-align: center;
+            background-color: #ffffff;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin: 0 auto;
+            animation: flash 2s infinite;
+            position: relative;
+            border-radius: 10px;
+        }
+        
+        .secondary-flag {
+            display: block;
+            margin: 0 auto 20px;
+            width: 120px;
             height: auto;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
-        img.flag {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 100px;
+        
+        h1 {
+            color: #2c786c;
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #555;
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #2c786c, transparent);
+            margin: 20px 0;
+        }
+        
+        .social-icons {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #555;
+            background: #f9f9f9;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: #e9f5f3;
+            transform: translateY(-3px);
+        }
+        
+        .social-icon img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+        
+        .qr-image {
+            margin: 20px auto;
+            width: 180px;
             height: auto;
-            z-index: 10;
+            border: 1px solid #eee;
+            padding: 8px;
+            border-radius: 5px;
         }
-.secondary-flag {
-    display: block;
-    margin: 0 auto 10px; /* Center it and add space below */
-    width: 150px; /* Adjust size */
-    height: auto;
-}
+        
         @keyframes flash {
             0%, 100% {
                 background-color: #ffffff;
@@ -73,45 +215,123 @@
                 background-color: #f0f8ff;
             }
         }
+        
+        .status-message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #ff9933;
+            min-height: 20px;
+        }
+        
+        .instructions {
+            background: #e9f5f3;
+            border-left: 4px solid #2c786c;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+        
+        .instructions h3 {
+            color: #2c786c;
+            margin-bottom: 8px;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 14px;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .control-panel, .preview-container {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <img src="./images/flag.jpg" alt="flag" class="flag">
-    <div id="container">
-        <div id="input-section">
-            <input type="text" id="nameInput" placeholder="Enter your name" />
-            <button onclick="generateContent()">OK</button>
+    <div class="container">
+        <div class="control-panel">
+            <h2 class="panel-title">Eid Greeting Card Generator</h2>
+            
+            <div class="input-group">
+                <label for="nameInput">Your Name:</label>
+                <input type="text" id="nameInput" placeholder="Enter your name">
+            </div>
+            
+            <button onclick="generateContent()">Generate Greeting Card</button>
+            <button id="saveGifButton" style="display: none;">Download as Animated GIF</button>
+            
+            <div class="status-message" id="statusMessage"></div>
+            
+            <div class="instructions">
+                <h3>How to Use:</h3>
+                <ul>
+                    <li>Enter your name in the input field</li>
+                    <li>Click "Generate Greeting Card"</li>
+                    <li>Preview your greeting card on the right</li>
+                    <li>Click "Download as Animated GIF" to save</li>
+                </ul>
+            </div>
         </div>
-        <div id="content" style="display: none;">
-<img src="./images/flag.jpg" alt="flag" class="secondary-flag">
-            <h1>عيد مبارك</h1>
-            <p>كل عام وانتم بخير</p>
-            <hr>
-            <p>———————-</p>
-            <p>مهنئكم : <span id="userName"></span></p>
-            <p>———————-</p>
-            <p>معهد ابن سينا العالي الطبي</p>
-            <p>حضرموت المكلا</p>
-            <p>سجل الان ..</p>
-            <img src="./images/qr-image.jpg" alt="QR Code" class="qr-image" />
-           <div class="social-icons">
-    <a href="https://www.facebook.com/ibnsinainstitute" target="_blank">
-        <img src="./images/facebook-icon.png" alt="Facebook">
-        https://www.facebook.com/ibnsinainstitute
-    </a>
-     <br>
-    <a href="https://www.instagram.com/ibnsinainstitute" target="_blank">
-        <img src="./images/instagram-icon.png" alt="Instagram">
-        https://www.instagram.com/ibnsinainstitute
-    </a>
-    <a href="https://wa.me/+967773991621" target="_blank">
-        <img src="./images/whatsapp-icon.png" alt="WhatsApp">
-        +967 773991621
-    </a>
-</div>
+        
+        <div class="preview-container">
+            <h3 class="preview-title">Preview</h3>
+            <div id="content" style="display: none;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Flag_of_Saudi_Arabia.svg/800px-Flag_of_Saudi_Arabia.svg.png" alt="flag" class="secondary-flag">
+                <h1>عيد مبارك</h1>
+                <p>كل عام وانتم بخير</p>
+                <hr>
+                <p>———————-</p>
+                <p>مهنئكم : <span id="userName"></span></p>
+                <p>———————-</p>
+                <p>معهد ابن سينا العالي الطبي</p>
+                <p>حضرموت المكلا</p>
+                <p>سجل الان ..</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://example.com" alt="QR Code" class="qr-image">
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/ibnsinainstitute" target="_blank" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
+                        <span>Facebook</span>
+                    </a>
+                    <a href="https://www.instagram.com/ibnsinainstitute" target="_blank" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://wa.me/+967773991621" target="_blank" class="social-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp">
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div id="previewPlaceholder" style="text-align: center; padding: 40px; color: #888; background: #f9f9f9; border-radius: 10px;">
+                <p>Your greeting card will appear here</p>
+                <p>Enter your name and click "Generate Greeting Card"</p>
+            </div>
         </div>
-        <button id="saveGifButton" style="display: none;">Save as Animated GIF</button>
     </div>
+    
+    <footer>
+        <p>معهد ابن سينا العالي الطبي | حضرموت المكلا</p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
@@ -121,53 +341,111 @@
             const userName = document.getElementById('userName');
             const content = document.getElementById('content');
             const saveGifButton = document.getElementById('saveGifButton');
-
+            const previewPlaceholder = document.getElementById('previewPlaceholder');
+            const statusMessage = document.getElementById('statusMessage');
+            
             if (nameInput.value.trim() !== "") {
                 userName.textContent = nameInput.value;
                 content.style.display = "block";
-                saveGifButton.style.display = "inline-block";
+                saveGifButton.style.display = "block";
+                previewPlaceholder.style.display = "none";
+                statusMessage.textContent = "Greeting card generated successfully!";
+                setTimeout(() => {
+                    statusMessage.textContent = "";
+                }, 3000);
             } else {
-                alert("Please enter your name.");
+                statusMessage.textContent = "Please enter your name.";
             }
         }
-
-        document.getElementById('saveGifButton').addEventListener('click', function () {
-    const content = document.getElementById('content');
-    const status = document.getElementById('status');
-    status.textContent = "Rendering GIF, please wait...";
-    
-    const gif = new GIF({
-        workers: 2,
-        quality: 10,
-        width: content.offsetWidth,
-        height: content.offsetHeight,
-    });
-    
-    const frames = 5; // reduce frames
-    let frameCount = 0;
-    
-    function captureFrame() {
-        html2canvas(content).then(canvas => {
-            gif.addFrame(canvas, { delay: 200 });
-            frameCount++;
-            status.textContent = `Rendering frame ${frameCount} of ${frames}`;
-            if (frameCount < frames) {
-                captureFrame();
-            } else {
+        
+        document.getElementById('saveGifButton').addEventListener('click', async function() {
+            const content = document.getElementById('content');
+            const saveButton = this;
+            const statusMessage = document.getElementById('statusMessage');
+            const originalText = saveButton.textContent;
+            
+            // Validate that content is visible
+            if (content.style.display !== "block") {
+                statusMessage.textContent = "Please generate the card first.";
+                return;
+            }
+            
+            try {
+                // Show processing state
+                saveButton.textContent = "Processing...";
+                saveButton.disabled = true;
+                statusMessage.textContent = "Creating your animated GIF. This may take a moment...";
+                
+                // Get dimensions
+                const width = content.offsetWidth;
+                const height = content.offsetHeight;
+                
+                // Initialize GIF
+                const gif = new GIF({
+                    workers: 3,
+                    quality: 15,
+                    width: width,
+                    height: height,
+                    workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
+                });
+                
+                // Capture frames at animation intervals
+                const frameCount = 8;  // More frames for smoother animation
+                const captureInterval = 250; // ms (matches animation timing)
+                
+                for (let i = 0; i < frameCount; i++) {
+                    // Wait for the next animation frame
+                    await new Promise(resolve => setTimeout(resolve, captureInterval));
+                    
+                    // Capture the content
+                    const canvas = await html2canvas(content, {
+                        scale: 1,
+                        logging: false,
+                        useCORS: true
+                    });
+                    
+                    // Add frame to GIF
+                    gif.addFrame(canvas, { delay: captureInterval });
+                }
+                
+                // Generate the GIF
                 gif.on('finished', function(blob) {
-                    status.textContent = "GIF ready!";
+                    // Create a download link
                     const link = document.createElement('a');
                     link.href = URL.createObjectURL(blob);
-                    link.download = 'animated_content.gif';
+                    link.download = 'eid_greeting.gif';
+                    document.body.appendChild(link);
                     link.click();
+                    
+                    // Clean up
+                    setTimeout(() => {
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(link.href);
+                    }, 100);
+                    
+                    // Reset button
+                    saveButton.textContent = originalText;
+                    saveButton.disabled = false;
+                    statusMessage.textContent = "GIF downloaded successfully!";
+                    
+                    setTimeout(() => {
+                        statusMessage.textContent = "";
+                    }, 3000);
                 });
+                
                 gif.render();
+                
+            } catch (error) {
+                console.error("GIF creation failed:", error);
+                statusMessage.textContent = "Failed to generate GIF. Please try again.";
+                saveButton.textContent = originalText;
+                saveButton.disabled = false;
+                
+                setTimeout(() => {
+                    statusMessage.textContent = "";
+                }, 3000);
             }
         });
-    }
-    
-    captureFrame();
-});
     </script>
 </body>
 </html>
