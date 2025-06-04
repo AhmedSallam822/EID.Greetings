@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eid Greeting Card Generator</title>
+    <title>بطاقة تهنئة عيد الفطر المبارك</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
             min-height: 100vh;
             display: flex;
@@ -29,7 +30,27 @@
             flex-wrap: wrap;
             gap: 30px;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+        
+        .header h1 {
+            color: #2c786c;
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header p {
+            color: #5aa897;
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .control-panel {
@@ -76,6 +97,7 @@
             border-radius: 8px;
             font-size: 16px;
             transition: border-color 0.3s;
+            text-align: center;
         }
         
         input:focus {
@@ -118,6 +140,9 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .preview-title {
@@ -138,6 +163,9 @@
             animation: flash 2s infinite;
             position: relative;
             border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .secondary-flag {
@@ -149,14 +177,14 @@
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         
-        h1 {
+        #content h1 {
             color: #2c786c;
-            font-size: 36px;
+            font-size: 42px;
             margin-bottom: 15px;
         }
         
-        p {
-            font-size: 18px;
+        #content p {
+            font-size: 20px;
             margin: 10px 0;
             color: #555;
         }
@@ -166,6 +194,7 @@
             height: 1px;
             background: linear-gradient(to right, transparent, #2c786c, transparent);
             margin: 20px 0;
+            width: 80%;
         }
         
         .social-icons {
@@ -185,6 +214,7 @@
             padding: 8px 15px;
             border-radius: 30px;
             transition: all 0.3s;
+            direction: ltr;
         }
         
         .social-icon:hover {
@@ -192,10 +222,9 @@
             transform: translateY(-3px);
         }
         
-        .social-icon img {
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
+        .social-icon i {
+            font-size: 20px;
+            margin-left: 8px;
         }
         
         .qr-image {
@@ -226,9 +255,9 @@
         
         .instructions {
             background: #e9f5f3;
-            border-left: 4px solid #2c786c;
+            border-right: 4px solid #2c786c;
             padding: 15px;
-            border-radius: 0 8px 8px 0;
+            border-radius: 8px 0 0 8px;
             margin-top: 25px;
             font-size: 14px;
         }
@@ -236,14 +265,15 @@
         .instructions h3 {
             color: #2c786c;
             margin-bottom: 8px;
+            text-align: center;
         }
         
         .instructions ul {
-            padding-left: 20px;
+            padding-right: 20px;
         }
         
         .instructions li {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         
         footer {
@@ -252,6 +282,80 @@
             color: #777;
             font-size: 14px;
             width: 100%;
+            padding: 15px;
+        }
+        
+        .progress-container {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 15px;
+            display: none;
+            width: 100%;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #2c786c, #5aa897);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 15px;
+            background: #e9f5f3;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            color: #2c786c;
+            font-weight: 500;
+            width: 100%;
+        }
+        
+        .success-message i {
+            margin-left: 8px;
+            color: #2c786c;
+        }
+        
+        .eid-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .decoration-item {
+            position: absolute;
+            opacity: 0.7;
+        }
+        
+        .moon {
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: #ffd700;
+        }
+        
+        .star {
+            font-size: 20px;
+            color: #ffd700;
+        }
+        
+        .star:nth-child(2) {
+            top: 40px;
+            left: 50px;
+        }
+        
+        .star:nth-child(3) {
+            bottom: 60px;
+            right: 70px;
+        }
+        
+        .star:nth-child(4) {
+            bottom: 30px;
+            left: 30px;
         }
         
         @media (max-width: 768px) {
@@ -263,41 +367,69 @@
             .control-panel, .preview-container {
                 max-width: 100%;
             }
+            
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            #content h1 {
+                font-size: 36px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="header">
+            <h1>بطاقة تهنئة عيد الفطر المبارك</h1>
+            <p>أنشئ بطاقة تهنئة شخصية مع اسمك وحولها إلى صورة متحركة</p>
+        </div>
+        
         <div class="control-panel">
-            <h2 class="panel-title">Eid Greeting Card Generator</h2>
+            <h2 class="panel-title">منشئ بطاقة التهنئة</h2>
             
             <div class="input-group">
-                <label for="nameInput">Your Name:</label>
-                <input type="text" id="nameInput" placeholder="Enter your name">
+                <label for="nameInput">اسمك الكريم:</label>
+                <input type="text" id="nameInput" placeholder="ادخل اسمك هنا">
             </div>
             
-            <button onclick="generateContent()">Generate Greeting Card</button>
-            <button id="saveGifButton" style="display: none;">Download as Animated GIF</button>
+            <button onclick="generateContent()">إنشاء بطاقة التهنئة</button>
+            <button id="saveGifButton" style="display: none;">تحميل كصورة متحركة</button>
+            
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i> تم تحميل الصورة المتحركة بنجاح!
+            </div>
             
             <div class="status-message" id="statusMessage"></div>
             
             <div class="instructions">
-                <h3>How to Use:</h3>
+                <h3>طريقة الاستخدام:</h3>
                 <ul>
-                    <li>Enter your name in the input field</li>
-                    <li>Click "Generate Greeting Card"</li>
-                    <li>Preview your greeting card on the right</li>
-                    <li>Click "Download as Animated GIF" to save</li>
+                    <li>ادخل اسمك في الحقل المخصص</li>
+                    <li>اضغط على زر "إنشاء بطاقة التهنئة"</li>
+                    <li>ستظهر البطاقة في قسم المعاينة</li>
+                    <li>اضغط على "تحميل كصورة متحركة" لحفظها</li>
                 </ul>
             </div>
         </div>
         
         <div class="preview-container">
-            <h3 class="preview-title">Preview</h3>
+            <h3 class="preview-title">معاينة البطاقة</h3>
             <div id="content" style="display: none;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Flag_of_Saudi_Arabia.svg/800px-Flag_of_Saudi_Arabia.svg.png" alt="flag" class="secondary-flag">
+                <div class="eid-decoration">
+                    <div class="decoration-item moon"><i class="fas fa-moon"></i></div>
+                    <div class="decoration-item star"><i class="fas fa-star"></i></div>
+                    <div class="decoration-item star"><i class="fas fa-star"></i></div>
+                    <div class="decoration-item star"><i class="fas fa-star"></i></div>
+                </div>
+                
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Flag_of_Saudi_Arabia.svg/800px-Flag_of_Saudi_Arabia.svg.png" alt="علم المملكة العربية السعودية" class="secondary-flag">
                 <h1>عيد مبارك</h1>
-                <p>كل عام وانتم بخير</p>
+                <p>كل عام وأنتم بخير</p>
                 <hr>
                 <p>———————-</p>
                 <p>مهنئكم : <span id="userName"></span></p>
@@ -305,37 +437,38 @@
                 <p>معهد ابن سينا العالي الطبي</p>
                 <p>حضرموت المكلا</p>
                 <p>سجل الان ..</p>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://example.com" alt="QR Code" class="qr-image">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://example.com" alt="رمز الاستجابة السريعة" class="qr-image">
                 <div class="social-icons">
                     <a href="https://www.facebook.com/ibnsinainstitute" target="_blank" class="social-icon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook">
-                        <span>Facebook</span>
+                        <i class="fab fa-facebook-f" style="color: #1877F2;"></i>
+                        <span>فيسبوك</span>
                     </a>
                     <a href="https://www.instagram.com/ibnsinainstitute" target="_blank" class="social-icon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
-                        <span>Instagram</span>
+                        <i class="fab fa-instagram" style="color: #E1306C;"></i>
+                        <span>إنستغرام</span>
                     </a>
                     <a href="https://wa.me/+967773991621" target="_blank" class="social-icon">
-                        <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp">
-                        <span>WhatsApp</span>
+                        <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                        <span>واتساب</span>
                     </a>
                 </div>
             </div>
             
-            <div id="previewPlaceholder" style="text-align: center; padding: 40px; color: #888; background: #f9f9f9; border-radius: 10px;">
-                <p>Your greeting card will appear here</p>
-                <p>Enter your name and click "Generate Greeting Card"</p>
+            <div id="previewPlaceholder" style="text-align: center; padding: 40px; color: #888; background: #f9f9f9; border-radius: 10px; width: 100%;">
+                <i class="fas fa-gift" style="font-size: 64px; margin-bottom: 20px; color: #2c786c;"></i>
+                <h3 style="color: #2c786c; margin-bottom: 15px;">بطاقتك جاهزة هنا</h3>
+                <p>ادخل اسمك واضغط على "إنشاء بطاقة التهنئة"</p>
             </div>
         </div>
+        
+        <footer>
+            <p>جميع الحقوق محفوظة © معهد ابن سينا العالي الطبي | حضرموت المكلا | 2023</p>
+        </footer>
     </div>
-    
-    <footer>
-        <p>معهد ابن سينا العالي الطبي | حضرموت المكلا</p>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
     <script>
+        // Fixed GIF generation using gif.js with proper worker initialization
         function generateContent() {
             const nameInput = document.getElementById('nameInput');
             const userName = document.getElementById('userName');
@@ -346,15 +479,15 @@
             
             if (nameInput.value.trim() !== "") {
                 userName.textContent = nameInput.value;
-                content.style.display = "block";
+                content.style.display = "flex";
                 saveGifButton.style.display = "block";
                 previewPlaceholder.style.display = "none";
-                statusMessage.textContent = "Greeting card generated successfully!";
+                statusMessage.textContent = "تم إنشاء بطاقة التهنئة بنجاح!";
                 setTimeout(() => {
                     statusMessage.textContent = "";
                 }, 3000);
             } else {
-                statusMessage.textContent = "Please enter your name.";
+                statusMessage.textContent = "الرجاء إدخال اسمك.";
             }
         }
         
@@ -362,19 +495,27 @@
             const content = document.getElementById('content');
             const saveButton = this;
             const statusMessage = document.getElementById('statusMessage');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const successMessage = document.getElementById('successMessage');
             const originalText = saveButton.textContent;
             
             // Validate that content is visible
-            if (content.style.display !== "block") {
-                statusMessage.textContent = "Please generate the card first.";
+            if (content.style.display !== "flex") {
+                statusMessage.textContent = "الرجاء إنشاء البطاقة أولاً.";
                 return;
             }
             
             try {
                 // Show processing state
-                saveButton.textContent = "Processing...";
+                saveButton.textContent = "جاري المعالجة...";
                 saveButton.disabled = true;
-                statusMessage.textContent = "Creating your animated GIF. This may take a moment...";
+                progressContainer.style.display = "block";
+                progressBar.style.width = "0%";
+                statusMessage.textContent = "جاري إنشاء الصورة المتحركة، الرجاء الانتظار...";
+                
+                // Load the GIF library dynamically
+                const { default: GIF } = await import('https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js');
                 
                 // Get dimensions
                 const width = content.offsetWidth;
@@ -382,18 +523,21 @@
                 
                 // Initialize GIF
                 const gif = new GIF({
-                    workers: 3,
+                    workers: 2,
                     quality: 15,
                     width: width,
                     height: height,
-                    workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
+                    workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js'
                 });
                 
                 // Capture frames at animation intervals
-                const frameCount = 8;  // More frames for smoother animation
-                const captureInterval = 250; // ms (matches animation timing)
+                const frameCount = 6; // Reduced for better performance
+                const captureInterval = 300; // ms (matches animation timing)
                 
                 for (let i = 0; i < frameCount; i++) {
+                    // Update progress
+                    progressBar.style.width = `${(i / frameCount) * 100}%`;
+                    
                     // Wait for the next animation frame
                     await new Promise(resolve => setTimeout(resolve, captureInterval));
                     
@@ -401,7 +545,8 @@
                     const canvas = await html2canvas(content, {
                         scale: 1,
                         logging: false,
-                        useCORS: true
+                        useCORS: true,
+                        backgroundColor: null
                     });
                     
                     // Add frame to GIF
@@ -413,7 +558,7 @@
                     // Create a download link
                     const link = document.createElement('a');
                     link.href = URL.createObjectURL(blob);
-                    link.download = 'eid_greeting.gif';
+                    link.download = 'تهنئة_عيد_الفطر.gif';
                     document.body.appendChild(link);
                     link.click();
                     
@@ -423,23 +568,29 @@
                         URL.revokeObjectURL(link.href);
                     }, 100);
                     
+                    // Show success
+                    progressBar.style.width = "100%";
+                    setTimeout(() => {
+                        progressContainer.style.display = "none";
+                        successMessage.style.display = "block";
+                        setTimeout(() => {
+                            successMessage.style.display = "none";
+                        }, 3000);
+                    }, 500);
+                    
                     // Reset button
                     saveButton.textContent = originalText;
                     saveButton.disabled = false;
-                    statusMessage.textContent = "GIF downloaded successfully!";
-                    
-                    setTimeout(() => {
-                        statusMessage.textContent = "";
-                    }, 3000);
                 });
                 
                 gif.render();
                 
             } catch (error) {
                 console.error("GIF creation failed:", error);
-                statusMessage.textContent = "Failed to generate GIF. Please try again.";
+                statusMessage.textContent = "فشل إنشاء الصورة المتحركة، الرجاء المحاولة مرة أخرى.";
                 saveButton.textContent = originalText;
                 saveButton.disabled = false;
+                progressContainer.style.display = "none";
                 
                 setTimeout(() => {
                     statusMessage.textContent = "";
