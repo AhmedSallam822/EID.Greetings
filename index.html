@@ -93,16 +93,18 @@
         input {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #e0e0f0;
             border-radius: 8px;
             font-size: 16px;
             transition: border-color 0.3s;
             text-align: center;
+            background-color: #f9f9ff;
         }
         
         input:focus {
             outline: none;
             border-color: #2c786c;
+            box-shadow: 0 0 8px rgba(44, 120, 108, 0.3);
         }
         
         button {
@@ -115,13 +117,14 @@
             cursor: pointer;
             width: 100%;
             font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s;
             margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(44, 120, 108, 0.3);
+            box-shadow: 0 6px 12px rgba(44, 120, 108, 0.2);
         }
         
         button:active {
@@ -150,6 +153,16 @@
             margin-bottom: 20px;
             color: #2c786c;
             font-size: 22px;
+            position: relative;
+        }
+        
+        .preview-title:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: #ff9933;
+            margin: 10px auto 0;
         }
         
         #content {
@@ -175,56 +188,101 @@
             height: auto;
             border-radius: 5px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eee;
         }
         
         #content h1 {
             color: #2c786c;
             font-size: 42px;
             margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
         
         #content p {
             font-size: 20px;
             margin: 10px 0;
             color: #555;
+            line-height: 1.6;
         }
         
         hr {
             border: 0;
             height: 1px;
             background: linear-gradient(to right, transparent, #2c786c, transparent);
-            margin: 20px 0;
+            margin: 20px auto;
             width: 80%;
         }
         
         .social-icons {
             margin-top: 25px;
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 15px;
+            width: 100%;
+            max-width: 400px;
         }
         
-        .social-icon {
+        .social-item {
             display: flex;
             align-items: center;
             text-decoration: none;
             color: #555;
             background: #f9f9f9;
-            padding: 8px 15px;
-            border-radius: 30px;
+            padding: 12px;
+            border-radius: 10px;
             transition: all 0.3s;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .social-item:hover {
+            background: #e9f5f3;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 20px;
+            margin-left: 12px;
+        }
+        
+        .facebook-icon {
+            background: #1877F2;
+            color: white;
+        }
+        
+        .instagram-icon {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+        }
+        
+        .whatsapp-icon {
+            background: #25D366;
+            color: white;
+        }
+        
+        .social-details {
+            flex-grow: 1;
+            text-align: right;
             direction: ltr;
         }
         
-        .social-icon:hover {
-            background: #e9f5f3;
-            transform: translateY(-3px);
+        .social-label {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #333;
         }
         
-        .social-icon i {
-            font-size: 20px;
-            margin-left: 8px;
+        .social-link {
+            font-size: 14px;
+            color: #666;
+            word-break: break-all;
         }
         
         .qr-image {
@@ -234,6 +292,8 @@
             border: 1px solid #eee;
             padding: 8px;
             border-radius: 5px;
+            background: white;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
         
         @keyframes flash {
@@ -375,6 +435,18 @@
             #content h1 {
                 font-size: 36px;
             }
+            
+            #content p {
+                font-size: 18px;
+            }
+            
+            .social-item {
+                padding: 10px;
+            }
+            
+            .social-link {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
@@ -438,41 +510,58 @@
                 <p>حضرموت المكلا</p>
                 <p>سجل الان ..</p>
                 <img src="./image/qr-image.jpg" alt="رمز الاستجابة السريعة" class="qr-image">
+                
                 <div class="social-icons">
-                    <a href="https://www.facebook.com/ibnsinainstitute" target="_blank" class="social-icon">
-                        <i class="fab fa-facebook-f" style="color: #1877F2;"></i>
-                        <span>فيسبوك</span>
+                    <a href="https://www.facebook.com/ibnsinainstitute" target="_blank" class="social-item">
+                        <div class="social-icon facebook-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="social-details">
+                            <div class="social-label">فيسبوك</div>
+                            <div class="social-link">www.facebook.com/ibnsinainstitute</div>
+                        </div>
                     </a>
-          www.facebook.com/ibnsinainstitute
-                    <a href="https://www.instagram.com/ibnsinainstitute" target="_blank" class="social-icon">
-                        <i class="fab fa-instagram" style="color: #E1306C;"></i>
-                        <span>إنستغرام</span>
+                    
+                    <a href="https://www.instagram.com/ibnsinainstitute" target="_blank" class="social-item">
+                        <div class="social-icon instagram-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="social-details">
+                            <div class="social-label">إنستغرام</div>
+                            <div class="social-link">www.instagram.com/ibnsinainstitute</div>
+                        </div>
                     </a>
-www.instagram.com/ibnsinainstitute
-                    <a href="https://wa.me/+967773991621" target="_blank" class="social-icon">
-                        <i class="fab fa-whatsapp" style="color: #25D366;"></i>
-                        <span>واتساب</span>
+                    
+                    <a href="https://wa.me/+967773991621" target="_blank" class="social-item">
+                        <div class="social-icon whatsapp-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="social-details">
+                            <div class="social-label">واتساب</div>
+                            <div class="social-link">+967 773991621</div>
+                        </div>
                     </a>
-  +967773991621
                 </div>
             </div>
             
             <div id="previewPlaceholder" style="text-align: center; padding: 40px; color: #888; background: #f9f9f9; border-radius: 10px; width: 100%;">
                 <i class="fas fa-gift" style="font-size: 64px; margin-bottom: 20px; color: #2c786c;"></i>
                 <h3 style="color: #2c786c; margin-bottom: 15px;">بطاقتك جاهزة هنا</h3>
-                <p>ادخل اسمك واضغط على "إنشاء بطاقة التهنئة"</p>
+                <p>ادخ�� اسمك واضغط على "إنشاء بطاقة التهنئة"</p>
             </div>
         </div>
         
         <footer>
             <p>جميع الحقوق محفوظة © معهد ابن سينا العالي الطبي | حضرموت المكلا | 2023</p>
         </footer>
-    </div>
+    </div> 
 
+    <!-- Fixed libraries with proper versions -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+    
     <script>
-        // Fixed GIF generation using gif.js with proper worker initialization
+        // Fixed GIF generation using gif.js with proper initialization
         function generateContent() {
             const nameInput = document.getElementById('nameInput');
             const userName = document.getElementById('userName');
@@ -495,7 +584,7 @@ www.instagram.com/ibnsinainstitute
             }
         }
         
-        document.getElementById('saveGifButton').addEventListener('click', async function() {
+        document.getElementById('saveGifButton').addEventListener('click', function() {
             const content = document.getElementById('content');
             const saveButton = this;
             const statusMessage = document.getElementById('statusMessage');
@@ -510,96 +599,94 @@ www.instagram.com/ibnsinainstitute
                 return;
             }
             
-            try {
-                // Show processing state
-                saveButton.textContent = "جاري المعالجة...";
-                saveButton.disabled = true;
-                progressContainer.style.display = "block";
-                progressBar.style.width = "0%";
-                statusMessage.textContent = "جاري إنشاء الصورة المتحركة، الرجاء الانتظار...";
-                
-                // Load the GIF library dynamically
-                const { default: GIF } = await import('https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js');
-                
-                // Get dimensions
-                const width = content.offsetWidth;
-                const height = content.offsetHeight;
-                
-                // Initialize GIF
-                const gif = new GIF({
-                    workers: 2,
-                    quality: 15,
-                    width: width,
-                    height: height,
-                    workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js'
-                });
-                
-                // Capture frames at animation intervals
-                const frameCount = 6; // Reduced for better performance
-                const captureInterval = 300; // ms (matches animation timing)
-                
-                for (let i = 0; i < frameCount; i++) {
-                    // Update progress
-                    progressBar.style.width = `${(i / frameCount) * 100}%`;
+            // Show processing state
+            saveButton.textContent = "جاري المعالجة...";
+            saveButton.disabled = true;
+            progressContainer.style.display = "block";
+            progressBar.style.width = "0%";
+            statusMessage.textContent = "جاري إنشاء الصورة المتحركة، الرجاء الانتظار...";
+            
+            // Initialize GIF
+            const gif = new GIF({
+                workers: 2,
+                quality: 15,
+                width: content.offsetWidth,
+                height: content.offsetHeight,
+                workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js'
+            });
+            
+            // Capture frames at animation intervals
+            const frameCount = 6; // Reduced for better performance
+            const captureInterval = 300; // ms (matches animation timing)
+            let framesCaptured = 0;
+            
+            // Function to capture frames recursively
+            function captureFrame() {
+                if (framesCaptured >= frameCount) {
+                    // Finish GIF creation
+                    gif.on('finished', function(blob) {
+                        // Create a download link
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = 'eid_greeting.gif';
+                        document.body.appendChild(link);
+                        link.click();
+                        
+                        // Clean up
+                        setTimeout(() => {
+                            document.body.removeChild(link);
+                            URL.revokeObjectURL(link.href);
+                        }, 100);
+                        
+                        // Show success
+                        progressBar.style.width = "100%";
+                        setTimeout(() => {
+                            progressContainer.style.display = "none";
+                            successMessage.style.display = "block";
+                            setTimeout(() => {
+                                successMessage.style.display = "none";
+                            }, 3000);
+                        }, 500);
+                        
+                        // Reset button
+                        saveButton.textContent = originalText;
+                        saveButton.disabled = false;
+                    });
                     
-                    // Wait for the next animation frame
-                    await new Promise(resolve => setTimeout(resolve, captureInterval));
-                    
+                    gif.render();
+                    return;
+                }
+                
+                // Update progress
+                progressBar.style.width = `${(framesCaptured / frameCount) * 100}%`;
+                
+                // Wait for the next animation frame
+                setTimeout(() => {
                     // Capture the content
-                    const canvas = await html2canvas(content, {
+                    html2canvas(content, {
                         scale: 1,
                         logging: false,
                         useCORS: true,
                         backgroundColor: null
-                    });
-                    
-                    // Add frame to GIF
-                    gif.addFrame(canvas, { delay: captureInterval });
-                }
-                
-                // Generate the GIF
-                gif.on('finished', function(blob) {
-                    // Create a download link
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = 'تهنئة_عيد_الفطر.gif';
-                    document.body.appendChild(link);
-                    link.click();
-                    
-                    // Clean up
-                    setTimeout(() => {
-                        document.body.removeChild(link);
-                        URL.revokeObjectURL(link.href);
-                    }, 100);
-                    
-                    // Show success
-                    progressBar.style.width = "100%";
-                    setTimeout(() => {
+                    }).then(canvas => {
+                        // Add frame to GIF
+                        gif.addFrame(canvas, { delay: captureInterval });
+                        framesCaptured++;
+                        
+                        // Capture next frame
+                        captureFrame();
+                    }).catch(error => {
+                        console.error("Canvas capture failed:", error);
+                        statusMessage.textContent = "حدث خطأ أثناء إنشاء الصورة المتحركة";
+                        saveButton.textContent = originalText;
+                        saveButton.disabled = false;
                         progressContainer.style.display = "none";
-                        successMessage.style.display = "block";
-                        setTimeout(() => {
-                            successMessage.style.display = "none";
-                        }, 3000);
-                    }, 500);
-                    
-                    // Reset button
-                    saveButton.textContent = originalText;
-                    saveButton.disabled = false;
-                });
-                
-                gif.render();
-                
-            } catch (error) {
-                console.error("GIF creation failed:", error);
-                statusMessage.textContent = "فشل إنشاء الصورة المتحركة، الرجاء المحاولة مرة أخرى.";
-                saveButton.textContent = originalText;
-                saveButton.disabled = false;
-                progressContainer.style.display = "none";
-                
-                setTimeout(() => {
-                    statusMessage.textContent = "";
-                }, 3000);
+                    });
+                }, captureInterval);
             }
+            
+            // Start capturing frames
+            captureFrame();
         });
     </script>
 </body>
